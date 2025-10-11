@@ -1,60 +1,242 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bejelentkezés - Pretzel's Pretzels</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/custom.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés - Pretzel's Pretzels</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-  <div class="container">
-    <a class="navbar-brand" href="index.html"><i class="fa-solid fa-house"></i></a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="index.html">Főoldal</a></li></ul>
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><i class="fa-solid fa-house"></i></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="index.html">Főoldal</a></li>
+            </ul>
+        </div>
+        <a class="btn btn-outline-dark" href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Kosár (<span id="cart-count">0</span>)</a>
     </div>
-    <a class="btn btn-outline-dark" href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Kosár</a>
-  </div>
 </nav>
 <section class="py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h3 class="card-title mb-4">Bejelentkezés</h3>
-            <form id="loginForm">
-              <div class="mb-3">
-                <label for="email" class="form-label">E-mail cím</label>
-                <input type="email" class="form-control" id="email" required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Jelszó</label>
-                <input type="password" class="form-control" id="password" required>
-              </div>
-              <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="guestChk">
-                <label class="form-check-label" for="guestChk">Vendégként lépek be</label>
-              </div>
-              <button type="submit" class="btn btn-primary w-100">Bejelentkezés</button>
-              <p class="mt-3 text-center">Nincs még fiókod? <a href="#">Regisztráció</a></p>
-            </form>
-          </div>
-        </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Alert Message -->
+                <div id="alertMessage" class="alert d-none" role="alert"></div>
+                <!-- login_with_register_toggle.html masolata! -->
 
-        <div class="mt-3 text-muted small">
-          <p><strong>Megjegyzés:</strong> Jelenleg nincs backend; a regisztráció és bejelentkezés csak váz.</p>
-        </div>
+                <!-- Login/Register Toggle -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <!-- Login Form -->
+                        <div id="loginSection">
+                            <h3 class="card-title mb-4">Bejelentkezés</h3>
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">E-mail cím</label>
+                                    <input type="email" class="form-control" id="loginEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Jelszó</label>
+                                    <input type="password" class="form-control" id="loginPassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 mb-2">Bejelentkezés</button>
+                                <button type="button" id="guestLoginBtn" class="btn btn-outline-secondary w-100">
+                                    <i class="fa-solid fa-user"></i> Vendégként folytatom
+                                </button>
+                                <p class="mt-3 text-center">
+                                    Nincs még fiókod? <a href="#" id="showRegister">Regisztráció</a>
+                                </p>
+                            </form>
+                        </div>
 
-      </div>
+                        <!-- Register Form (hidden by default) -->
+                        <div id="registerSection" class="d-none">
+                            <h3 class="card-title mb-4">Regisztráció</h3>
+                            <form id="registerForm">
+                                <div class="mb-3">
+                                    <label for="registerEmail" class="form-label">E-mail cím</label>
+                                    <input type="email" class="form-control" id="registerEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPassword" class="form-label">Jelszó</label>
+                                    <input type="password" class="form-control" id="registerPassword" required minlength="6">
+                                    <div class="form-text">Minimum 6 karakter</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPasswordConfirm" class="form-label">Jelszó megerősítése</label>
+                                    <input type="password" class="form-control" id="registerPasswordConfirm" required minlength="6">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Regisztráció</button>
+                                <p class="mt-3 text-center">
+                                    Már van fiókod? <a href="#" id="showLogin">Bejelentkezés</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 alert alert-info">
+                    <i class="fa-solid fa-info-circle"></i>
+                    <strong>Backend aktív!</strong> A regisztráció és bejelentkezés működik, az adatok Supabase adatbázisban tárolódnak.
+                </div>
+
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/main.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/cart.js"></script>
+<script>
+    const API_BASE_URL = window.CONFIG ? window.CONFIG.API_BASE_URL: 'http://localhost:8080/api/auth';
+
+    // Update cart count on page load
+    updateCartCount();
+
+    // DOM Elements
+    const loginSection = document.getElementById('loginSection');
+    const registerSection = document.getElementById('registerSection');
+    const alertMessage = document.getElementById('alertMessage');
+
+    // Toggle between login and register
+    document.getElementById('showRegister').addEventListener('click', (e) => {
+      e.preventDefault();
+      loginSection.classList.add('d-none');
+      registerSection.classList.remove('d-none');
+      hideAlert();
+    });
+
+    document.getElementById('showLogin').addEventListener('click', (e) => {
+      e.preventDefault();
+      registerSection.classList.add('d-none');
+      loginSection.classList.remove('d-none');
+      hideAlert();
+    });
+
+    // Alert functions
+    function showAlert(message, type) {
+      alertMessage.textContent = message;
+      alertMessage.className = `alert alert-${type}`;
+      alertMessage.classList.remove('d-none');
+      window.scrollTo(0, 0);
+    }
+
+    function hideAlert() {
+      alertMessage.classList.add('d-none');
+    }
+
+    // Handle Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Save authentication data
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+
+          showAlert('Sikeres bejelentkezés! Átirányítás...', 'success');
+
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
+        } else {
+          showAlert(data.message || 'Hibás email vagy jelszó!', 'danger');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        showAlert('Kapcsolódási hiba. Kérlek próbáld újra!', 'danger');
+      }
+    });
+
+    // Handle Register
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerPasswordConfirm').value;
+
+      if (password !== confirmPassword) {
+        showAlert('A jelszavak nem egyeznek!', 'danger');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Save authentication data
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+
+          showAlert('Sikeres regisztráció! Átirányítás...', 'success');
+
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
+        } else {
+          showAlert(data.message || 'A regisztráció sikertelen!', 'danger');
+        }
+      } catch (error) {
+        console.error('Registration error:', error);
+        showAlert('Kapcsolódási hiba. Kérlek próbáld újra!', 'danger');
+      }
+    });
+
+    // Handle Guest Login
+    document.getElementById('guestLoginBtn').addEventListener('click', async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/guest`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Save authentication data
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+
+          showAlert('Vendégként bejelentkezve! Átirányítás...', 'success');
+
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
+        } else {
+          showAlert('Vendég bejelentkezés sikertelen!', 'danger');
+        }
+      } catch (error) {
+        console.error('Guest login error:', error);
+        showAlert('Kapcsolódási hiba. Kérlek próbáld újra!', 'danger');
+      }
+    });
+
+    // Check if already logged in
+    if (localStorage.getItem('token')) {
+      window.location.href = 'index.html';
+    }
+</script>
 </body>
 </html>
