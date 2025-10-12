@@ -225,4 +225,4 @@ class AuthService {
 
 // Export singleton instance
 const authService = new AuthService();
-export default authService;
+window.authService = authService;
