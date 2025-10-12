@@ -1,6 +1,5 @@
 // auth.js - Place this in your frontend project
 
-const API_BASE_URL = 'http://localhost:8080/api/auth';
 
 // Authentication Service
 class AuthService {
