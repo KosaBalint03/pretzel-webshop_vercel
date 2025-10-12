@@ -7,7 +7,7 @@ const isLocalhost = window.location.hostname === 'localhost' ||
 // Set API URL based on environment
 const API_BASE_URL = isLocalhost
     ? 'http://localhost:8080/api/auth'  // Local development
-    : 'https://pretzel-webshop-backend-1.onrender.com';  // REPLACE WITH YOUR ACTUAL RENDER URL!
+    : 'https://pretzel-webshop-backend-1.onrender.com/api/auth';  // REPLACE WITH YOUR ACTUAL RENDER URL!
 
 
 // Export for use in other files

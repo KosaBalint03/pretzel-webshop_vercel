@@ -91,8 +91,7 @@
 <script src="js/config.js"></script>
 <script src="js/cart.js"></script>
 <script>
-    // Use API_BASE_URL from config.js (already declared there)
-    console.log('API URL:', window.CONFIG.API_BASE_URL); // DEBUG
+    const API_BASE_URL = window.CONFIG ? window.CONFIG.API_BASE_URL : 'http://localhost:8080/api/auth';
 
     console.log('API URL:', API_BASE_URL); // DEBUG
 
