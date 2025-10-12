@@ -130,7 +130,7 @@ class AuthService {
             headers
         });
     }
-}
+
 // Check if user is guest
     isGuest() {
         return this.user && this.user.isGuest === true;
