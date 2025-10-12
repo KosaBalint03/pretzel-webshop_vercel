@@ -13,9 +13,7 @@ const API_BASE_URL = isLocalhost
 // Export for use in other files
 const CONFIG = {
     API_BASE_URL: API_BASE_URL,
-    API_ORDERS_URL: isLocalhost
-        ? 'http://localhost:8080/api/orders'
-        : 'https://YOUR-RENDER-URL.onrender.com/api/orders'
+
 };
 
 // Make it globally available
